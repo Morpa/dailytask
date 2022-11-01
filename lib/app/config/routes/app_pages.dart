@@ -1,5 +1,5 @@
-import 'package:dailytask/app/features/dashboard/screens/dashboard_screen.dart';
 import 'package:get/get.dart';
+import 'package:dailytask/app/features/dashboard/views/screens/dashboard_screen.dart';
 
 part 'app_routes.dart';
 
