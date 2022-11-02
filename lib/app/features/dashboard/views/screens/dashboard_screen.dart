@@ -3,11 +3,14 @@ library dashboard;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:dailytask/app/utils/helpers/app_helpers.dart';
 import 'package:dailytask/app/config/constants/app_constants.dart';
 import 'package:dailytask/app/shared_components/user_profile.dart';
 import 'package:dailytask/app/shared_components/selection_button.dart';
 import 'package:dailytask/app/shared_components/simple_selection_button.dart';
 import 'package:dailytask/app/shared_components/simple_user_profile.dart';
+import 'package:dailytask/app/shared_components/search_field.dart';
+import 'package:dailytask/app/shared_components/header_text.dart';
 
 // binding
 part '../../bindings/dashboard_binding.dart';
@@ -26,28 +29,27 @@ class DashboardScreen extends GetView<DashboardController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Row(
-      children: [
-        Flexible(
-          flex: 3,
-          child: SingleChildScrollView(
-            child: _buildSidebar(context),
+      body: Row(
+        children: [
+          Flexible(
+            flex: 3,
+            child: SingleChildScrollView(
+              child: _buildSidebar(context),
+            ),
           ),
-        ),
-        Flexible(
-          flex: 10,
-          child: SingleChildScrollView(
+          Flexible(
+            flex: 10,
             child: _buildTaskContent(context),
           ),
-        ),
-        Flexible(
-          flex: 4,
-          child: SingleChildScrollView(
-            child: _buildCalendarContent(context),
+          Flexible(
+            flex: 4,
+            child: SingleChildScrollView(
+              child: _buildCalendarContent(context),
+            ),
           ),
-        ),
-      ],
-    ));
+        ],
+      ),
+    );
   }
 
   Widget _buildSidebar(BuildContext context) {
@@ -97,7 +99,20 @@ class DashboardScreen extends GetView<DashboardController> {
   }
 
   Widget _buildTaskContent(BuildContext context) {
-    return Container();
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: sSpacing),
+      child: Column(
+        children: [
+          const SizedBox(height: sSpacing),
+          SearchField(
+            hintText: 'Search Task',
+            onSearch: controller.onSelectedTask,
+          ),
+          const SizedBox(height: sSpacing),
+          HeaderText(DateTime.now().formatdMMMMY()),
+        ],
+      ),
+    );
   }
 
   Widget _buildCalendarContent(BuildContext context) {

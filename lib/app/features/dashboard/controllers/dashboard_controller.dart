@@ -22,4 +22,9 @@ class DashboardController extends GetxController {
     // ignore: avoid_print
     print(label);
   }
+
+  void onSelectedTask(String value) {
+    // ignore: avoid_print
+    print(value);
+  }
 }
