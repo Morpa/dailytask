@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -21,7 +23,16 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.basic,
       initialRoute: AppPages.initial,
       getPages: AppPages.routes,
+      scrollBehavior: CustomScrollBehaviour(),
       debugShowCheckedModeBanner: false,
     );
   }
+}
+
+class CustomScrollBehaviour extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
 }

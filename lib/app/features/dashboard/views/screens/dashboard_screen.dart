@@ -1,5 +1,7 @@
 library dashboard;
 
+import 'package:dailytask/app/shared_components/card_task.dart';
+import 'package:dailytask/app/shared_components/task_progress.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
@@ -22,6 +24,7 @@ part '../../controllers/dashboard_controller.dart';
 part '../components/main_menu.dart';
 part '../components/member.dart';
 part '../components/task_menu.dart';
+part '../components/task_in_progress.dart';
 
 class DashboardScreen extends GetView<DashboardController> {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -109,7 +112,18 @@ class DashboardScreen extends GetView<DashboardController> {
             onSearch: controller.onSelectedTask,
           ),
           const SizedBox(height: sSpacing),
-          HeaderText(DateTime.now().formatdMMMMY()),
+          Row(
+            children: [
+              HeaderText(DateTime.now().formatdMMMMY()),
+              const Spacer(),
+              SizedBox(
+                width: 200,
+                child: TaskProgress(data: controller.dataTask),
+              ),
+            ],
+          ),
+          const SizedBox(height: sSpacing),
+          _TaskInProgress(data: controller.taskInProgress),
         ],
       ),
     );
