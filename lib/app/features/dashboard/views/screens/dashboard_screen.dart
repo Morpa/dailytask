@@ -1,6 +1,7 @@
 library dashboard;
 
 import 'package:dailytask/app/shared_components/card_task.dart';
+import 'package:dailytask/app/shared_components/list_task_assigned.dart';
 import 'package:dailytask/app/shared_components/task_progress.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,6 +26,8 @@ part '../components/main_menu.dart';
 part '../components/member.dart';
 part '../components/task_menu.dart';
 part '../components/task_in_progress.dart';
+part '../components/header_weekly_task.dart';
+part '../components/weekly_task.dart';
 
 class DashboardScreen extends GetView<DashboardController> {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -42,7 +45,9 @@ class DashboardScreen extends GetView<DashboardController> {
           ),
           Flexible(
             flex: 10,
-            child: _buildTaskContent(context),
+            child: SingleChildScrollView(
+              child: _buildTaskContent(context),
+            ),
           ),
           Flexible(
             flex: 4,
@@ -124,6 +129,15 @@ class DashboardScreen extends GetView<DashboardController> {
           ),
           const SizedBox(height: sSpacing),
           _TaskInProgress(data: controller.taskInProgress),
+          const SizedBox(height: sSpacing),
+          const _HeaderWeeklyTask(),
+          const SizedBox(height: sSpacing),
+          _WeeklyTask(
+            data: controller.weeklyTask,
+            onPressed: controller.onPressedTask,
+            onPressedAssign: controller.onPressedAssignTask,
+            onPressedMember: controller.onPressedMemberTask,
+          ),
         ],
       ),
     );

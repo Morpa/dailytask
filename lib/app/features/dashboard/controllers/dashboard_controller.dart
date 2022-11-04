@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 part of dashboard;
 
 class DashboardController extends GetxController {
@@ -36,20 +38,56 @@ class DashboardController extends GetxController {
     )
   ];
 
+  final weeklyTask = [
+    ListTaskAssignedData(
+      icon: const Icon(EvaIcons.monitor, color: Colors.blueGrey),
+      label: "Slicing UI",
+      jobDescription: "Programmer",
+      assignTo: "Alex Kid",
+      editDate: DateTime.now().add(-const Duration(hours: 2)),
+    ),
+    ListTaskAssignedData(
+      icon: const Icon(EvaIcons.star, color: Colors.amber),
+      label: "Personal branding",
+      jobDescription: "Marketing",
+      assignTo: "Nathan Drake",
+      editDate: DateTime.now().add(-const Duration(days: 50)),
+    ),
+    const ListTaskAssignedData(
+      icon: Icon(EvaIcons.colorPalette, color: Colors.blue),
+      label: "UI UX ",
+      jobDescription: "Design",
+    ),
+    const ListTaskAssignedData(
+      icon: Icon(EvaIcons.pieChart, color: Colors.redAccent),
+      label: "Determine meeting schedule ",
+      jobDescription: "System Analyst",
+    ),
+  ];
+
   void onPressedProfile() {}
 
   void onSelectedMainMenu(int index, SelectionButtonData value) {
-    // ignore: avoid_print
     print(value.label);
   }
 
   void onSelectedTaskMenu(int index, String label) {
-    // ignore: avoid_print
     print(label);
   }
 
   void onSelectedTask(String value) {
-    // ignore: avoid_print
     print(value);
+  }
+
+  void onPressedTask(int index, ListTaskAssignedData data) {
+    print(data);
+  }
+
+  void onPressedAssignTask(int index, ListTaskAssignedData data) {
+    print(data);
+  }
+
+  void onPressedMemberTask(int index, ListTaskAssignedData data) {
+    print(data);
   }
 }
