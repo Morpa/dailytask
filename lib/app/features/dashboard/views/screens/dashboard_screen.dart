@@ -1,8 +1,5 @@
 library dashboard;
 
-import 'package:dailytask/app/shared_components/card_task.dart';
-import 'package:dailytask/app/shared_components/list_task_assigned.dart';
-import 'package:dailytask/app/shared_components/task_progress.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
@@ -14,6 +11,11 @@ import 'package:dailytask/app/shared_components/simple_selection_button.dart';
 import 'package:dailytask/app/shared_components/simple_user_profile.dart';
 import 'package:dailytask/app/shared_components/search_field.dart';
 import 'package:dailytask/app/shared_components/header_text.dart';
+import 'package:dailytask/app/shared_components/card_task.dart';
+import 'package:dailytask/app/shared_components/list_task_assigned.dart';
+import 'package:dailytask/app/shared_components/list_task_date.dart';
+import 'package:dailytask/app/shared_components/task_progress.dart';
+import 'package:intl/intl.dart';
 
 // binding
 part '../../bindings/dashboard_binding.dart';
@@ -28,6 +30,7 @@ part '../components/task_menu.dart';
 part '../components/task_in_progress.dart';
 part '../components/header_weekly_task.dart';
 part '../components/weekly_task.dart';
+part '../components/task_group.dart';
 
 class DashboardScreen extends GetView<DashboardController> {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -36,6 +39,7 @@ class DashboardScreen extends GetView<DashboardController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Flexible(
             flex: 3,
@@ -49,11 +53,13 @@ class DashboardScreen extends GetView<DashboardController> {
               child: _buildTaskContent(context),
             ),
           ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height,
+            child: const VerticalDivider(),
+          ),
           Flexible(
             flex: 4,
-            child: SingleChildScrollView(
-              child: _buildCalendarContent(context),
-            ),
+            child: SingleChildScrollView(child: _buildCalendarContent(context)),
           ),
         ],
       ),
@@ -110,6 +116,7 @@ class DashboardScreen extends GetView<DashboardController> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: sSpacing),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const SizedBox(height: sSpacing),
           SearchField(
@@ -144,6 +151,37 @@ class DashboardScreen extends GetView<DashboardController> {
   }
 
   Widget _buildCalendarContent(BuildContext context) {
-    return Container();
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: sSpacing),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          const SizedBox(
+            height: sSpacing,
+          ),
+          Row(
+            children: [
+              const Expanded(
+                child: HeaderText('Calendar'),
+              ),
+              IconButton(
+                onPressed: controller.onPressedCalendar,
+                icon: const Icon(EvaIcons.calendarOutline),
+                tooltip: 'calendar',
+              ),
+            ],
+          ),
+          ...controller.taskGroup
+              .map(
+                (e) => _TaskGroup(
+                  title: DateFormat('d MMMM').format(e[0].date),
+                  data: e,
+                  onPressed: controller.onPressedTaskGroup,
+                ),
+              )
+              .toList(),
+        ],
+      ),
+    );
   }
 }

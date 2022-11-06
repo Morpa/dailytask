@@ -65,6 +65,55 @@ class DashboardController extends GetxController {
     ),
   ];
 
+  final taskGroup = [
+    [
+      ListTaskDateData(
+        date: DateTime.now().add(const Duration(days: 2, hours: 10)),
+        label: "5 posts on instagram",
+        jobDescription: "Marketing",
+      ),
+      ListTaskDateData(
+        date: DateTime.now().add(const Duration(days: 2, hours: 11)),
+        label: "Platform Concept",
+        jobDescription: "Animation",
+      ),
+    ],
+    [
+      ListTaskDateData(
+        date: DateTime.now().add(const Duration(days: 4, hours: 5)),
+        label: "UI UX Marketplace",
+        jobDescription: "Design",
+      ),
+      ListTaskDateData(
+        date: DateTime.now().add(const Duration(days: 4, hours: 6)),
+        label: "Create Post For App",
+        jobDescription: "Marketing",
+      ),
+    ],
+    [
+      ListTaskDateData(
+        date: DateTime.now().add(const Duration(days: 6, hours: 5)),
+        label: "2 Posts on Facebook",
+        jobDescription: "Marketing",
+      ),
+      ListTaskDateData(
+        date: DateTime.now().add(const Duration(days: 6, hours: 6)),
+        label: "Create Icon App",
+        jobDescription: "Design",
+      ),
+      ListTaskDateData(
+        date: DateTime.now().add(const Duration(days: 6, hours: 8)),
+        label: "Fixing Error Payment",
+        jobDescription: "Programmer",
+      ),
+      ListTaskDateData(
+        date: DateTime.now().add(const Duration(days: 6, hours: 10)),
+        label: "Create Form Interview",
+        jobDescription: "System Analyst",
+      ),
+    ]
+  ];
+
   void onPressedProfile() {}
 
   void onSelectedMainMenu(int index, SelectionButtonData value) {
@@ -88,6 +137,12 @@ class DashboardController extends GetxController {
   }
 
   void onPressedMemberTask(int index, ListTaskAssignedData data) {
+    print(data);
+  }
+
+  void onPressedCalendar() {}
+
+  void onPressedTaskGroup(int index, ListTaskDateData data) {
     print(data);
   }
 }

@@ -5,7 +5,6 @@ class _Member extends StatelessWidget {
   final int maxDisplayPeople = 2;
 
   const _Member({
-    super.key,
     required this.member,
   });
 
