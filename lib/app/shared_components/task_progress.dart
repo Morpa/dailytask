@@ -1,6 +1,6 @@
 import 'package:dailytask/app/config/constants/app_constants.dart';
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class TaskProgressData {
   final int totalTask;
@@ -13,21 +13,19 @@ class TaskProgressData {
 }
 
 class TaskProgress extends StatelessWidget {
-  final TaskProgressData data;
-
   const TaskProgress({
-    super.key,
     required this.data,
-  });
+    Key? key,
+  }) : super(key: key);
+
+  final TaskProgressData data;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         _buildText(),
-        Expanded(
-          child: _buildProgress(),
-        )
+        Expanded(child: _buildProgress()),
       ],
     );
   }

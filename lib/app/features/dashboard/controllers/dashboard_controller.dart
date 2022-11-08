@@ -116,6 +116,10 @@ class DashboardController extends GetxController {
 
   void onPressedProfile() {}
 
+  void searchTask(String value) {
+    print(value);
+  }
+
   void onSelectedMainMenu(int index, SelectionButtonData value) {
     print(value.label);
   }
@@ -144,5 +148,11 @@ class DashboardController extends GetxController {
 
   void onPressedTaskGroup(int index, ListTaskDateData data) {
     print(data);
+  }
+
+  void openDrawer() {
+    if (scafoldKey.currentState != null) {
+      scafoldKey.currentState!.openDrawer();
+    }
   }
 }

@@ -1,13 +1,14 @@
-import 'package:flutter/material.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:flutter/material.dart';
+
 import 'package:dailytask/app/config/constants/app_constants.dart';
 
 class SearchField extends StatelessWidget {
   SearchField({
-    super.key,
     this.onSearch,
     this.hintText,
-  });
+    Key? key,
+  }) : super(key: key);
 
   final controller = TextEditingController();
   final Function(String value)? onSearch;
@@ -18,11 +19,12 @@ class SearchField extends StatelessWidget {
     return TextField(
       controller: controller,
       decoration: InputDecoration(
-          prefixIcon: const Icon(EvaIcons.search),
-          enabledBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(width: 1),
-          ),
-          hintText: hintText ?? 'search...'),
+        prefixIcon: const Icon(EvaIcons.search),
+        enabledBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(width: .1),
+        ),
+        hintText: hintText ?? "search...",
+      ),
       onEditingComplete: () {
         FocusScope.of(context).unfocus();
         if (onSearch != null) onSearch!(controller.text);

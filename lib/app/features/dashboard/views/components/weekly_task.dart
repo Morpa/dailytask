@@ -1,17 +1,18 @@
 part of dashboard;
 
 class _WeeklyTask extends StatelessWidget {
-  final List<ListTaskAssignedData> data;
-  final Function(int index, ListTaskAssignedData data) onPressed;
-  final Function(int index, ListTaskAssignedData data) onPressedAssign;
-  final Function(int index, ListTaskAssignedData data) onPressedMember;
-
   const _WeeklyTask({
     required this.data,
     required this.onPressed,
     required this.onPressedAssign,
     required this.onPressedMember,
-  });
+    Key? key,
+  }) : super(key: key);
+
+  final List<ListTaskAssignedData> data;
+  final Function(int index, ListTaskAssignedData data) onPressed;
+  final Function(int index, ListTaskAssignedData data) onPressedAssign;
+  final Function(int index, ListTaskAssignedData data) onPressedMember;
 
   @override
   Widget build(BuildContext context) {

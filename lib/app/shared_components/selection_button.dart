@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:dailytask/app/config/constants/app_constants.dart';
 
 class SelectionButtonData {
   final IconData activeIcon;
   final IconData icon;
   final String label;
-  final int? totalNotifications;
+  final int? totalNotification;
 
   SelectionButtonData({
     required this.activeIcon,
     required this.icon,
     required this.label,
-    this.totalNotifications,
+    this.totalNotification,
   });
 }
 
 class SelectionButton extends StatefulWidget {
   const SelectionButton({
-    super.key,
     this.initialSelected = 0,
     required this.data,
     required this.onSelected,
-  });
+    Key? key,
+  }) : super(key: key);
 
   final int initialSelected;
   final List<SelectionButtonData> data;
@@ -38,30 +39,31 @@ class _SelectionButtonState extends State<SelectionButton> {
   @override
   void initState() {
     super.initState();
-
     selected = widget.initialSelected;
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
-        children: widget.data.asMap().entries.map((e) {
-      final index = e.key;
-      final data = e.value;
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: _Button(
-          selected: selected == index,
-          data: data,
-          onPressed: () {
-            widget.onSelected(index, data);
-            setState(() {
-              selected = index;
-            });
-          },
-        ),
-      );
-    }).toList());
+      children: widget.data.asMap().entries.map((e) {
+        final index = e.key;
+        final data = e.value;
+
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: _Button(
+            selected: selected == index,
+            onPressed: () {
+              widget.onSelected(index, data);
+              setState(() {
+                selected = index;
+              });
+            },
+            data: data,
+          ),
+        );
+      }).toList(),
+    );
   }
 }
 
@@ -70,34 +72,34 @@ class _Button extends StatelessWidget {
     required this.selected,
     required this.data,
     required this.onPressed,
-  });
+    Key? key,
+  }) : super(key: key);
 
   final bool selected;
   final SelectionButtonData data;
-  final VoidCallback onPressed;
+  final Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
     return Material(
       color:
-          (!selected) ? null : Theme.of(context).primaryColor.withOpacity(0.1),
+          (!selected) ? null : Theme.of(context).primaryColor.withOpacity(.1),
       borderRadius: BorderRadius.circular(sBorderRadius),
       child: InkWell(
         onTap: onPressed,
-        borderRadius: BorderRadius.circular(sBorderRadius),
+        borderRadius: BorderRadius.circular(10),
         child: Padding(
           padding: const EdgeInsets.all(15),
           child: Row(
             children: [
               _buildIcon(),
-              const SizedBox(
-                width: sSpacing / 2,
-              ),
+              const SizedBox(width: sSpacing / 2),
               Expanded(child: _buildLabel()),
-              Padding(
-                padding: const EdgeInsets.only(left: sSpacing / 2),
-                child: _buildNotify(),
-              ),
+              if (data.totalNotification != null)
+                Padding(
+                  padding: const EdgeInsets.only(left: sSpacing / 2),
+                  child: _buildNotif(),
+                )
             ],
           ),
         ),
@@ -123,14 +125,14 @@ class _Button extends StatelessWidget {
             ? FontColorPallets.grey
             : Theme.of(Get.context!).primaryColor,
         fontWeight: FontWeight.bold,
-        letterSpacing: 0.8,
+        letterSpacing: .8,
         fontSize: 14,
       ),
     );
   }
 
-  Widget _buildNotify() {
-    return (data.totalNotifications == null || data.totalNotifications! <= 0)
+  Widget _buildNotif() {
+    return (data.totalNotification == null || data.totalNotification! <= 0)
         ? Container()
         : Container(
             width: 30,
@@ -143,10 +145,11 @@ class _Button extends StatelessWidget {
                 topRight: Radius.circular(10),
               ),
             ),
+            alignment: Alignment.center,
             child: Text(
-              (data.totalNotifications! >= 100)
+              (data.totalNotification! >= 100)
                   ? "99+"
-                  : "${data.totalNotifications!}",
+                  : "${data.totalNotification}",
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 10,

@@ -1,11 +1,12 @@
 part of dashboard;
 
 class _TaskInProgress extends StatelessWidget {
-  final List<CardTaskData> data;
-
   const _TaskInProgress({
     required this.data,
-  });
+    Key? key,
+  }) : super(key: key);
+
+  final List<CardTaskData> data;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,6 @@ class _TaskInProgress extends StatelessWidget {
 
   Color _getSequenceColor(int index) {
     int val = index % 4;
-
     if (val == 3) {
       return Colors.indigo;
     } else if (val == 2) {

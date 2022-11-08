@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 import 'package:dailytask/app/config/constants/app_constants.dart';
 
 class ListTaskDateData {
@@ -15,16 +16,16 @@ class ListTaskDateData {
 }
 
 class ListTaskDate extends StatelessWidget {
-  final ListTaskDateData data;
-  final Function() onPressed;
-  final Color? dividerColor;
-
   const ListTaskDate({
-    super.key,
     required this.data,
     required this.onPressed,
     this.dividerColor,
-  });
+    Key? key,
+  }) : super(key: key);
+
+  final ListTaskDateData data;
+  final Function() onPressed;
+  final Color? dividerColor;
 
   @override
   Widget build(BuildContext context) {
@@ -37,17 +38,19 @@ class ListTaskDate extends StatelessWidget {
           children: [
             _buildHours(),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: sSpacing / 2),
+              padding: const EdgeInsets.symmetric(horizontal: sSpacing),
               child: _buildDivider(),
             ),
             Expanded(
-                child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildTitle(),
-                _buildSubtitle(),
-              ],
-            )),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildTitle(),
+                  const SizedBox(height: 5),
+                  _buildSubtitle(),
+                ],
+              ),
+            )
           ],
         ),
       ),
@@ -98,9 +101,7 @@ class ListTaskDate extends StatelessWidget {
     return Text(
       data.label,
       maxLines: 1,
-      style: const TextStyle(
-        fontWeight: FontWeight.w600,
-      ),
+      style: const TextStyle(fontWeight: FontWeight.w600),
       overflow: TextOverflow.ellipsis,
     );
   }

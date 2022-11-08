@@ -2,8 +2,9 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'package:dailytask/app/config/constants/app_constants.dart';
+
 import 'package:dailytask/app/utils/helpers/app_helpers.dart';
+import 'package:dailytask/app/config/constants/app_constants.dart';
 
 class ListTaskAssignedData {
   final Icon icon;
@@ -22,18 +23,18 @@ class ListTaskAssignedData {
 }
 
 class ListTaskAssigned extends StatelessWidget {
-  final ListTaskAssignedData data;
-  final Function() onPressed;
-  final Function()? onPressedAssign;
-  final Function()? onPressedMember;
-
   const ListTaskAssigned({
-    super.key,
     required this.data,
     required this.onPressed,
     required this.onPressedAssign,
     required this.onPressedMember,
-  });
+    Key? key,
+  }) : super(key: key);
+
+  final ListTaskAssignedData data;
+  final Function() onPressed;
+  final Function()? onPressedAssign;
+  final Function()? onPressedMember;
 
   @override
   Widget build(BuildContext context) {

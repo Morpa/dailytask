@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:dailytask/app/config/constants/app_constants.dart';
 
 class SimpleSelectionButton extends StatefulWidget {

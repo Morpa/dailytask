@@ -1,26 +1,30 @@
 import 'package:flutter/material.dart';
+
 import 'package:dailytask/app/config/constants/app_constants.dart';
 import 'package:dailytask/app/utils/helpers/app_helpers.dart';
 
 class SimpleUserProfile extends StatelessWidget {
-  final String name;
-  final VoidCallback onPressed;
-
   const SimpleUserProfile({
-    super.key,
     required this.name,
     required this.onPressed,
-  });
+    Key? key,
+  }) : super(key: key);
+
+  final String name;
+  final Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: _buildAvatar(),
-      title: _buildName(),
-      trailing: IconButton(
-        onPressed: onPressed,
-        icon: const Icon(Icons.more_horiz),
-        splashRadius: 20,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: ListTile(
+        leading: _buildAvatar(),
+        title: _buildName(),
+        trailing: IconButton(
+          onPressed: onPressed,
+          icon: const Icon(Icons.more_horiz),
+          splashRadius: 24,
+        ),
       ),
     );
   }
@@ -28,9 +32,9 @@ class SimpleUserProfile extends StatelessWidget {
   Widget _buildAvatar() {
     return CircleAvatar(
       radius: 20,
-      backgroundColor: Colors.orange.withOpacity(0.2),
+      backgroundColor: Colors.orange.withOpacity(.2),
       child: Text(
-        name.getInitialName(),
+        name.getInitialName(2).toUpperCase(),
         style: const TextStyle(
           color: Colors.orange,
           fontWeight: FontWeight.bold,
@@ -47,6 +51,8 @@ class SimpleUserProfile extends StatelessWidget {
         color: FontColorPallets.black,
         fontSize: 13,
       ),
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
     );
   }
 }

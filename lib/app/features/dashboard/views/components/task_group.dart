@@ -1,15 +1,16 @@
 part of dashboard;
 
 class _TaskGroup extends StatelessWidget {
-  final String title;
-  final List<ListTaskDateData> data;
-  final Function(int index, ListTaskDateData data) onPressed;
-
   const _TaskGroup({
     required this.title,
     required this.data,
     required this.onPressed,
-  });
+    Key? key,
+  }) : super(key: key);
+
+  final String title;
+  final List<ListTaskDateData> data;
+  final Function(int index, ListTaskDateData data) onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -19,17 +20,16 @@ class _TaskGroup extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildTitle(),
+          const SizedBox(height: sSpacing / 2),
           ...data
               .asMap()
               .entries
-              .map(
-                (e) => ListTaskDate(
-                  data: e.value,
-                  onPressed: () => onPressed(e.key, e.value),
-                  dividerColor: _getSequenceColor(e.key),
-                ),
-              )
-              .toList(),
+              .map((e) => ListTaskDate(
+                    data: e.value,
+                    onPressed: () {},
+                    dividerColor: _getSequenceColor(e.key),
+                  ))
+              .toList()
         ],
       ),
     );

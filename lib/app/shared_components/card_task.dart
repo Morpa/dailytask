@@ -1,6 +1,7 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+
 import 'package:dailytask/app/utils/helpers/app_helpers.dart';
 
 class CardTaskData {
@@ -16,16 +17,16 @@ class CardTaskData {
 }
 
 class CardTask extends StatelessWidget {
-  final CardTaskData data;
-  final Color primary;
-  final Color onPrimary;
-
   const CardTask({
-    super.key,
     required this.data,
     required this.primary,
     required this.onPrimary,
-  });
+    Key? key,
+  }) : super(key: key);
+
+  final CardTaskData data;
+  final Color primary;
+  final Color onPrimary;
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +40,7 @@ class CardTask extends StatelessWidget {
             height: 250,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [
-                  primary,
-                  primary.withOpacity(0.7),
-                ],
+                colors: [primary, primary.withOpacity(.7)],
                 begin: AlignmentDirectional.topCenter,
                 end: AlignmentDirectional.bottomCenter,
               ),
@@ -61,7 +59,7 @@ class CardTask extends StatelessWidget {
                         children: [
                           _buildLabel(),
                           const SizedBox(height: 20),
-                          _buildJobDescription(),
+                          _buildJobdescription(),
                         ],
                       ),
                     ),
@@ -73,8 +71,8 @@ class CardTask extends StatelessWidget {
                         SizedBox(
                           height: 20,
                           child: VerticalDivider(
-                            color: onPrimary,
                             thickness: 1,
+                            color: onPrimary,
                           ),
                         ),
                         _buildHours(),
@@ -106,13 +104,13 @@ class CardTask extends StatelessWidget {
     );
   }
 
-  Widget _buildJobDescription() {
+  Widget _buildJobdescription() {
     return Container(
       decoration: BoxDecoration(
         color: onPrimary.withOpacity(.3),
         borderRadius: BorderRadius.circular(10),
       ),
-      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: Text(
         data.jobDescription,
         style: TextStyle(
@@ -150,21 +148,22 @@ class CardTask extends StatelessWidget {
         backgroundColor: onPrimary,
       ),
       icon: const Icon(EvaIcons.checkmarkCircle2Outline),
-      label: const Text('Done'),
+      label: const Text("Done"),
     );
   }
 }
 
 class _IconLabel extends StatelessWidget {
-  final Color color;
-  final IconData iconData;
-  final String label;
-
   const _IconLabel({
     required this.color,
     required this.iconData,
     required this.label,
-  });
+    Key? key,
+  }) : super(key: key);
+
+  final Color color;
+  final IconData iconData;
+  final String label;
 
   @override
   Widget build(BuildContext context) {
@@ -172,8 +171,8 @@ class _IconLabel extends StatelessWidget {
       children: [
         Icon(
           iconData,
-          size: 18,
           color: color,
+          size: 18,
         ),
         const SizedBox(width: 5),
         Text(
@@ -182,16 +181,17 @@ class _IconLabel extends StatelessWidget {
             fontSize: 12,
             color: color.withOpacity(.8),
           ),
-        ),
+        )
       ],
     );
   }
 }
 
 class _BackgroundDecoration extends StatelessWidget {
-  final Widget child;
+  const _BackgroundDecoration({required this.child, Key? key})
+      : super(key: key);
 
-  const _BackgroundDecoration({required this.child});
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -217,7 +217,7 @@ class _BackgroundDecoration extends StatelessWidget {
             ),
           ),
         ),
-        child
+        child,
       ],
     );
   }

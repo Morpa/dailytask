@@ -1,25 +1,27 @@
 part of dashboard;
 
 class _HeaderWeeklyTask extends StatelessWidget {
-  const _HeaderWeeklyTask();
+  const _HeaderWeeklyTask({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const HeaderText('Weekly Task'),
+        const HeaderText("Weekly Task"),
         const Spacer(),
-        _buildAddArchive(),
-        const SizedBox(
-          width: 10,
-        ),
-        _buildAddButton(),
+        _buildArchive(),
+        const SizedBox(width: 10),
+        _buildAddNewButton(),
       ],
     );
   }
 
-  Widget _buildAddButton() {
+  Widget _buildAddNewButton() {
     return ElevatedButton.icon(
+      icon: const Icon(
+        EvaIcons.plus,
+        size: 16,
+      ),
       onPressed: () {},
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
@@ -27,15 +29,11 @@ class _HeaderWeeklyTask extends StatelessWidget {
         ),
         elevation: 0,
       ),
-      icon: const Icon(
-        EvaIcons.plus,
-        size: 16,
-      ),
-      label: const Text('New'),
+      label: const Text("New"),
     );
   }
 
-  Widget _buildAddArchive() {
+  Widget _buildArchive() {
     return ElevatedButton(
       onPressed: () {},
       style: ElevatedButton.styleFrom(
@@ -46,7 +44,7 @@ class _HeaderWeeklyTask extends StatelessWidget {
         ),
         elevation: 0,
       ),
-      child: const Text('Archive'),
+      child: const Text("Archive"),
     );
   }
 }

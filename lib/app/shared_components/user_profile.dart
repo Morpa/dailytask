@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:dailytask/app/config/constants/app_constants.dart';
 
 class UserProfileData {
@@ -15,39 +16,37 @@ class UserProfileData {
 
 class UserProfile extends StatelessWidget {
   const UserProfile({
-    super.key,
     required this.data,
     required this.onPressed,
-  });
+    Key? key,
+  }) : super(key: key);
 
   final UserProfileData data;
-  final VoidCallback onPressed;
+  final Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10),
       child: InkWell(
-        onTap: onPressed,
         borderRadius: BorderRadius.circular(sBorderRadius),
+        onTap: onPressed,
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Row(
             children: [
               _buildImage(),
-              const SizedBox(
-                width: 10,
-              ),
+              const SizedBox(width: 10),
               Expanded(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _buildName(),
-                    _buildJobDescription(),
+                    _buildJobdescription(),
                   ],
                 ),
-              ),
+              )
             ],
           ),
         ),
@@ -74,12 +73,12 @@ class UserProfile extends StatelessWidget {
     );
   }
 
-  Widget _buildJobDescription() {
+  Widget _buildJobdescription() {
     return Text(
       data.jobDescription,
       style: const TextStyle(
         fontWeight: FontWeight.w300,
-        color: FontColorPallets.grey,
+        color: FontColorPallets.black,
       ),
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
